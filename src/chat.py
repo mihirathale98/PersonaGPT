@@ -1,6 +1,6 @@
-from gemini_api import GeminiAPI
-from prompts import chat_with_persona
-from persona import Persona
+from src.gemini_api import GeminiAPI
+from src.prompts import chat_with_persona
+from src.persona import Persona
 
 
 class ChatSession:

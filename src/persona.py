@@ -1,7 +1,7 @@
-from information_retrieval import InformationRetrieval
-from prompts import persona_creation_from_wiki
-from gemini_api import GeminiAPI
-from utils import parse_model_output
+from src.information_retrieval import InformationRetrieval
+from src.prompts import persona_creation_from_wiki
+from src.gemini_api import GeminiAPI
+from src.utils import parse_model_output
 
 
 class Persona:

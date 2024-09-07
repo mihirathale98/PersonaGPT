@@ -1,4 +1,4 @@
-from wiki_scraper import WikiScraper
+from src.wiki_scraper import WikiScraper
 
 class InformationRetrieval:
 

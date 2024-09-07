@@ -1,7 +1,7 @@
 import streamlit as st
-from persona import Persona
-from gemini_api import GeminiAPI
-from chat import ChatSession
+from src.persona import Persona
+from src.gemini_api import GeminiAPI
+from src.chat import ChatSession
 
 
 gemini_api = GeminiAPI()
