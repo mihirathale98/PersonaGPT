@@ -11,7 +11,7 @@ class GeminiAPI:
         self.model = genai.GenerativeModel(model_name)
 
     def generate(
-        self, input_prompt, temperature=0.7, top_p=0.95, top_k=40, max_tokens=2048
+        self, input_prompt, temperature=1.7, top_p=0.8, top_k=100, max_tokens=2048
     ):
         response = self.model.generate_content(
             input_prompt,
