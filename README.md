@@ -27,4 +27,4 @@ Chat with any famous personality you want to on whatever topic.
 
 
 ## Example Conversation
-![alt text](image.png)
+![alt text](image-2.png)
