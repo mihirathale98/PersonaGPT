@@ -14,8 +14,8 @@ class Persona:
         ## with max retries 3
         persona = None
         persona_information =  self.information_retrieval.retrieve_information(persona_name)
-        wiki_info = persona_information['wikipedia_information']
-        wiki_persona = persona_creation_from_wiki.format(person_name=persona_name, wikipedia_information=wiki_info)
+        wiki_info = persona_information['relevant_information']
+        wiki_persona = persona_creation_from_wiki.format(person_name=persona_name, relevant_information=wiki_info)
         for i in range(3):
             try:
                 model_output = self.gemini_api.generate(wiki_persona)
@@ -28,6 +28,5 @@ class Persona:
 
 
     def create_persona(self, persona_name):
-        personas = {}
-        personas['wiki_persona'] = {'persona': self.create_persona_from_wiki(persona_name), 'name': persona_name}
-        return personas
+        persona = {'persona': self.create_persona_from_wiki(persona_name), 'name': persona_name}
+        return persona

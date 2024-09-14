@@ -37,7 +37,6 @@ class TTS_Wrapper:
             text_chunks = self.split_text(text)
             wav_chunks = []
             for chunk in text_chunks:
-                attention = self.tts_model.get_speaker_attention(chunk, speaker_wav, language=self.language)
                 wav_chunk = self.tts_model.tts(text=chunk, speaker_wav=speaker_wav, language=self.language)
                 wav_chunks.append(wav_chunk)
             

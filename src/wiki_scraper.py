@@ -28,3 +28,4 @@ class WikiScraper:
         for key, value in page_data.items():
             content += f"{key}: {value}\n"
         return content
+

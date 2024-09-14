@@ -4,6 +4,7 @@ import os
 from src.brave_search import brave_search
 from src.scraper import scrape_data
 import time
+from src.prompts import statement_extractor, statement_extractor_summ
 
 
 class PersonalityStatementFinder:
@@ -26,8 +27,10 @@ class PersonalityStatementFinder:
     
     def extract_statements(self,personality, search_results):
         # Modify the prompt to extract press statements or news-related content
-        prompt = f"Extract press statements or interview excerpts by {personality} from the following news articles. If no direct statements are found, summarize any relevant information about their press statements or interviews:\n\n"
-        prompt += "\n\n".join([search_results, 'Output:'])
+        prompt = statement_extractor.format(
+            personality=personality,
+            news_articles=search_results
+        )
         
         response = self.model.generate(prompt)
         return response.strip()
@@ -47,4 +50,13 @@ class PersonalityStatementFinder:
                 statements = self.extract_statements(personality, search_results)
                 all_statements.append(statements)
 
-        return all_statements
+        summary = self.summarize_info(all_statements)
+        return summary
+    
+    def summarize_info(self, all_statements):
+        all_statements = '\n'.join(all_statements)
+        prompt = statement_extractor_summ.format(
+            information=all_statements
+        )
+        response = self.model.generate(prompt)
+        return response

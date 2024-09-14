@@ -18,7 +18,6 @@ def load_audio(path):
 
 
 gemini_api = GeminiAPI()
-statement_finder = PersonalityStatementFinder()
 voice_search = VoiceSearch()
 
 if 'tts_wrapper' not in st.session_state:
@@ -36,15 +35,15 @@ with st.sidebar:
         if persona_name.strip() == "":
             st.warning("Please enter a valid persona name.")
         else:
-            chat_session = ChatSession(persona_name)
-            video_url = voice_search.get_speech_from_youtube(persona_name)
+            with st.spinner("Creating persona..."):
+                chat_session = ChatSession(persona_name)
+            with st.spinner("Searching for audio..."):
+                video_url = voice_search.get_speech_from_youtube(persona_name)
             if video_url is None:
                 video_url = st.text_input('Enter a video URL to extract audio from')
             if video_url:
                 st.session_state.wav_path = voice_search.get_audio_from_youtube(video_url)
                 st.session_state.chat_session = chat_session
-                st.session_state.relevant_statements = statement_finder.get_personality_statements(persona_name)
-                st.write(f"Relevant Statements: {st.session_state.relevant_statements}")
                 st.session_state.persona_name = persona_name
                 st.session_state.messages = [
                     {

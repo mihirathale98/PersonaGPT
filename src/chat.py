@@ -8,7 +8,7 @@ class ChatSession:
     def __init__(self, persona_name):
         self.gemini_api = GeminiAPI()
         self.persona_creator = Persona()
-        self.persona = self.persona_creator.create_persona(persona_name)["wiki_persona"]
+        self.persona = self.persona_creator.create_persona(persona_name)
         self.history = {}
 
     def add_message(self, message):
