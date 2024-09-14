@@ -12,22 +12,18 @@ class VoiceSearch:
     def __init__(self):
         pass
 
-    def get_speech(self, name):
-        query = f"{name} Audio Sample Interview Video YouTube"
-        wav_file = self.get_speech_from_youtube(query)
-        return wav_file
-
     def web_search(self, query):
         response = brave_search(query)
         return response
 
-    def get_speech_from_youtube(self, query):
-        search_results = self.web_search(query)
+    def get_speech_from_youtube(self, persona):
+        search_results = self.web_search(f'{persona} audio video youtube')
         if search_results is None:
             return None
         for res in search_results:
-            if '''www.youtube.com/watch?v=''' in res['url']:
-                return self.get_audio_from_youtube(res['url'])
+            if '''www.youtube.com/watch''' in res['url']:
+                return res['url']
+        return None
 
     def get_audio_from_youtube(self, video_url):
         temp_video = 'temp_video.mp4'
