@@ -37,21 +37,22 @@ with st.sidebar:
             st.warning("Please enter a valid persona name.")
         else:
             chat_session = ChatSession(persona_name)
-            video_url = voice_search.get_speech_from_youtube(f"{persona_name} Video")
+            video_url = voice_search.get_speech_from_youtube(persona_name)
             if video_url is None:
                 video_url = st.text_input('Enter a video URL to extract audio from')
-            st.session_state.wav_path = voice_search.get_audio_from_youtube(video_url)
-            st.session_state.chat_session = chat_session
-            st.session_state.relevant_statements = statement_finder.get_personality_statements(persona_name)
-            st.write(f"Relevant Statements: {st.session_state.relevant_statements}")
-            st.session_state.persona_name = persona_name
-            st.session_state.messages = [
-                {
-                    "role": "system",
-                    "content": f"You are now chatting with {persona_name}.",
-                }
-            ]
-            st.success(f"Persona '{persona_name}' created successfully!")
+            if video_url:
+                st.session_state.wav_path = voice_search.get_audio_from_youtube(video_url)
+                st.session_state.chat_session = chat_session
+                st.session_state.relevant_statements = statement_finder.get_personality_statements(persona_name)
+                st.write(f"Relevant Statements: {st.session_state.relevant_statements}")
+                st.session_state.persona_name = persona_name
+                st.session_state.messages = [
+                    {
+                        "role": "system",
+                        "content": f"You are now chatting with {persona_name}.",
+                    }
+                ]
+                st.success(f"Persona '{persona_name}' created successfully!")
     else:
         if "chat_session" not in st.session_state:
             st.session_state.chat_session = None
