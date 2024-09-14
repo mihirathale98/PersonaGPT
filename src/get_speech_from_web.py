@@ -46,14 +46,19 @@ class VoiceSearch:
         probe_data = json.loads(probe.stdout)
         duration = float(probe_data['format']['duration'])
         
-        # Determine the shorter of 30 seconds or the video duration
-        clip_duration = min(30, duration)
-        
-        # Use ffmpeg to clip and convert to WAV
+        if duration > 60:
+            start_time = duration / 2 - 15  # Start 15 seconds before the middle
+            clip_duration = 30  # Clip for 30 seconds
+        else:
+            start_time = 0  # Clip from the start
+            clip_duration = min(30, duration)  # Clip the entire video if it's shorter than 30 seconds
+
+        # Modify the ffmpeg command to include the start time (`-ss` flag)
         subprocess.run([
             "ffmpeg",
+            "-ss", str(start_time),  # Start time of the clip
             "-i", temp_video,
-            "-t", str(clip_duration),
+            "-t", str(clip_duration),  # Clip duration
             "-acodec", "pcm_s16le",  # 16-bit PCM codec for WAV
             "-ar", "44100",  # 44.1kHz sample rate
             "-y",  # Overwrite output file if it exists

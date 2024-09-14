@@ -96,6 +96,6 @@ if st.session_state.chat_session:
                     audio_bytes_float = audio_bytes_int.astype(np.float32) / 32767
                     # Play the audio
 
-                    st.audio(audio_bytes_float, format='audio/wav', start_time=0, sample_rate=16000)
+                    st.audio(audio_bytes_float, format='audio/wav', start_time=0, sample_rate=25000)
 else:
     st.write("Please create a Persona to start the conversation.")

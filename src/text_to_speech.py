@@ -9,5 +9,5 @@ class TTS_Wrapper:
         self.language = language
     
     def get_speech(self, text, speaker_wav):
-        wav = self.tts_model.tts(text=text, speaker_wav= speaker_wav, language=self.language)
+        wav = self.tts_model.tts(text=text, speaker_wav=speaker_wav, language=self.language)
         return wav
