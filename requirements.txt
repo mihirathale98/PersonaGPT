@@ -1,3 +1,7 @@
 streamlit
 google-generativeai
 Wikipedia-API
+yt-dlp
+TTS
+torch
+transformers

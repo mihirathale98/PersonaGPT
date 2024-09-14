@@ -69,7 +69,7 @@ if st.session_state.chat_session:
 
         try:
             response = chat_session.converse(prompt)
-            audio_bytes = st.session_state.tts_wrapper.get_speech(response, st.session_state.wav_path)
+            audio_bytes = st.session_state.tts_wrapper.get_speech([response], [st.session_state.wav_path])
             audio_bytes_int = (np.array(audio_bytes) * 32767).astype(np.int16)
 
             audio_base64 = base64.b64encode(audio_bytes_int.tobytes()).decode('utf-8')
