@@ -18,7 +18,7 @@ Chat with any famous personality you want to on whatever topic.
 ```export GEMINI_API_KEY=your_api_key```
 
 ## Run
-```streamlit run streamlit_demo.py```
+```streamlit run app.py```
 
 ### How to use?
 1. Enter the name of any famous personality. eg Elon Musk
