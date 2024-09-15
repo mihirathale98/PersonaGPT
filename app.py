@@ -5,6 +5,7 @@ from src.chat import ChatSession
 from src.get_statements import PersonalityStatementFinder
 from src.text_to_speech import TTS_Wrapper
 from src.get_speech_from_web import VoiceSearch
+from src.chat_search import summarize_data
 
 import base64
 import numpy as np
@@ -64,10 +65,12 @@ if st.session_state.chat_session:
     if prompt:
         st.session_state.messages.append({"role": "user", "content": prompt})
 
+
         chat_session = st.session_state.chat_session
 
         try:
-            response = chat_session.converse(prompt)
+            extra_info = summarize_data(st.session_state.persona_name, prompt)
+            response = chat_session.converse(prompt, extra_info)
             audio_bytes = st.session_state.tts_wrapper.get_speech([response], [st.session_state.wav_path])
             audio_bytes_int = (np.array(audio_bytes) * 32767).astype(np.int16)
 
@@ -98,6 +101,6 @@ if st.session_state.chat_session:
                     audio_bytes_float = audio_bytes_int.astype(np.float32) / 32767
                     # Play the audio
 
-                    st.audio(audio_bytes_float, format='audio/wav', start_time=0, sample_rate=25000)
+                    st.audio(audio_bytes_float, format='audio/wav', start_time=0, sample_rate=24000)
 else:
     st.write("Please create a Persona to start the conversation.")

@@ -22,12 +22,13 @@ class ChatSession:
     def add_assistant_message(self, message, person_name):
         self.add_message({"role": person_name, "content": message})
 
-    def converse(self, user_message):
+    def converse(self, user_message, extra_info):
         self.add_user_message(user_message)
         input_prompt = chat_with_persona.format(
             person_name=self.persona["name"],
             persona=self.persona["persona"],
             conversation=str(self.history),
+            extra_info=extra_info
         )
         response = self.gemini_api.generate(input_prompt)
         self.add_assistant_message(response, "assistant")

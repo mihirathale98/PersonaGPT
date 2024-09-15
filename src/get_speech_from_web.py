@@ -17,7 +17,7 @@ class VoiceSearch:
         return response
 
     def get_speech_from_youtube(self, persona):
-        search_results = self.web_search(f'{persona} audio video youtube')
+        search_results = self.web_search(f'{persona} Interview or Press Release Video Youtube')
         if search_results is None:
             return None
         for res in search_results:
