@@ -1,6 +1,13 @@
 # PersonaGPT
 Chat with any famous personality you want to on whatever topic.
 
+Current Workflow - 
+1. Scrape Wiki for given persona
+2. Scrape news and articles and find information and statements
+3. Search YouTube for relevant videos, download and extract audio
+4. Chat with web search enabled
+5. Synthesize speech for responses
+
 
 ## Setup 
 
